@@ -3,8 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import timm
 
-from .point_rend import PointRendModule, point_sample, calculate_uncertainty
-
 class MLP(nn.Module):
     """
     Linear Embedding: C_in -> C_out
@@ -307,18 +305,3 @@ class GreenFormer(nn.Module):
         Kept for compatibility with inference scripts.
         """
         return self.forward(x)
-if __name__ == "__main__":
-    from src.loss import calculate_uncertainty # Fix import if needed, or redefine
-    # Actually calculate_uncertainty is in src.point_rend
-    # We need to import it at top of file
-    model = GreenFormer()
-    x = torch.randn(2, 4, 1024, 1024) # Test 1024
-    # Mock point_rend
-    # ...
-
-if __name__ == "__main__":
-    model = GreenFormer()
-    x = torch.randn(2, 4, 512, 512)
-    out = model(x)
-    print("Alpha Shape:", out['alpha'].shape)
-    print("FG Shape:", out['fg'].shape)
